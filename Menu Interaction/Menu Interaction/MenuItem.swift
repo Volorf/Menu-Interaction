@@ -9,8 +9,10 @@ import SwiftUI
 
 struct MenuItem: View {
     
-    @Binding var isActive: Bool
     let labelName: String
+    let buttonThumbstickState: Thumbstick
+    @Binding var currentThumbstickState: Thumbstick
+    @Binding var counter: Int
     
     private let size: Double = 50
     
@@ -26,13 +28,17 @@ struct MenuItem: View {
             Text(labelName)
                 .font(.system(size: 12))
                 .multilineTextAlignment(.center)
-                .offset(x: 0, y: isActive ? 10 : size - 30)
+                .offset(x: 0, y: currentThumbstickState == buttonThumbstickState ? 10 : size - 30)
         }
         .frame(width: size, height: size)
         .mask(
             Rectangle()
                 .frame(width: size, height: size)
         )
+        .onTapGesture()
+        {
+            counter += 1;
+        }
         
         
         
@@ -41,6 +47,6 @@ struct MenuItem: View {
 
 struct MenuItem_Previews: PreviewProvider {
     static var previews: some View {
-        MenuItem(isActive: .constant(false), labelName: "Test")
+        MenuItem(labelName: "Test", buttonThumbstickState: .North, currentThumbstickState: .constant(.North), counter: .constant(0))
     }
 }

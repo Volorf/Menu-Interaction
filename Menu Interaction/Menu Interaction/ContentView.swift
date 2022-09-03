@@ -9,50 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var offset = CGSize.zero
-    @State private var isBigg: Bool = false;
+    @State private var currentThumbstickState = Thumbstick.None
+    @State private var counter: Int = 0
     
     var body: some View
     {
         ZStack()
         {
-            Rectangle()
-                .fill(.red)
-                .frame(width: 100, height: 100)
-                .offset(x: offset.width > offset.height ? offset.width : 0, y: offset.height > offset.width ? offset.height : 0)
-                .gesture(
-                    DragGesture()
-                        .onChanged
-                        {
-                            gesture in offset = gesture.translation
-                            print("offset:  \(offset)")
-                            
-                            if(gesture.translation.width >= 50)
-                            {
-                                self.isBigg = true;
-                            }
-                            else
-                            {
-                                self.isBigg = false
-                            }
-                        }
-                        .onEnded
-                        { value in
-                            withAnimation(.spring())
-                            {
-                            offset = .zero
-                            }
-                        }
-                )
             
-            MenuItem(isActive: $isBigg, labelName: "Settings")
+            
+            MenuItem(labelName: "Settings", buttonThumbstickState: .West, currentThumbstickState: $currentThumbstickState, counter: $counter)
                 .offset(x: -100, y: 0)
-            MenuItem(isActive: $isBigg, labelName: "Create")
-                .offset(x: 0, y: 100)
-            MenuItem(isActive: $isBigg, labelName: "Library")
-                .offset(x: 100, y: 0)
-            MenuItem(isActive: $isBigg, labelName: "Save")
+            MenuItem(labelName: "Create", buttonThumbstickState: .North, currentThumbstickState: $currentThumbstickState, counter: $counter)
                 .offset(x: 0, y: -100)
+            MenuItem(labelName: "Library", buttonThumbstickState: .East, currentThumbstickState: $currentThumbstickState, counter: $counter)
+                .offset(x: 100, y: 0)
+            MenuItem(labelName: "Save", buttonThumbstickState: .South, currentThumbstickState: $currentThumbstickState, counter: $counter)
+                .offset(x: 0, y: 100)
         }
         
         

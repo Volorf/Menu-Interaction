@@ -13,6 +13,7 @@
 		E4A3CA8528C263C700DA7E28 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4A3CA8428C263C700DA7E28 /* Preview Assets.xcassets */; };
 		E4A3CA8C28C268ED00DA7E28 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A3CA8B28C268ED00DA7E28 /* MenuItem.swift */; };
 		E4A3CA8E28C288E500DA7E28 /* ThumbstickState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A3CA8D28C288E500DA7E28 /* ThumbstickState.swift */; };
+		E4A3CA9028C35A6C00DA7E28 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A3CA8F28C35A6C00DA7E28 /* MenuButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		E4A3CA8428C263C700DA7E28 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E4A3CA8B28C268ED00DA7E28 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		E4A3CA8D28C288E500DA7E28 /* ThumbstickState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbstickState.swift; sourceTree = "<group>"; };
+		E4A3CA8F28C35A6C00DA7E28 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 		E4A3CA7C28C263C400DA7E28 /* Menu Interaction */ = {
 			isa = PBXGroup;
 			children = (
+				E4A3CA8F28C35A6C00DA7E28 /* MenuButton.swift */,
 				E4A3CA8D28C288E500DA7E28 /* ThumbstickState.swift */,
 				E4A3CA7D28C263C400DA7E28 /* MenuInteractionApp.swift */,
 				E4A3CA8B28C268ED00DA7E28 /* MenuItem.swift */,
@@ -145,6 +148,7 @@
 			files = (
 				E4A3CA8C28C268ED00DA7E28 /* MenuItem.swift in Sources */,
 				E4A3CA8E28C288E500DA7E28 /* ThumbstickState.swift in Sources */,
+				E4A3CA9028C35A6C00DA7E28 /* MenuButton.swift in Sources */,
 				E4A3CA8028C263C400DA7E28 /* ContentView.swift in Sources */,
 				E4A3CA7E28C263C400DA7E28 /* MenuInteractionApp.swift in Sources */,
 			);
