@@ -10,12 +10,17 @@ import SwiftUI
 struct MenuButton: View {
     
     @State private var offset = CGSize.zero
+    @Binding var currentThumbstickState: Thumbstick
+    let triggerLimit: Double = 10
+    @State private var currentMovingState: MovingState = .None
+    @State private var limitedOffset = CGSize.zero
     
+    /// <#Description#>
     var body: some View {
         Rectangle()
             .fill(.red)
             .frame(width: 100, height: 100)
-            .offset(x: offset.width > offset.height ? offset.width : 0, y: offset.height > offset.width ? offset.height : 0)
+            .offset(x: limitedOffset.width, y: limitedOffset.height)
             .gesture(
                 DragGesture()
                     .onChanged
@@ -23,21 +28,42 @@ struct MenuButton: View {
                         gesture in offset = gesture.translation
                         print("offset:  \(offset)")
                         
-                        if(gesture.translation.width >= 50)
+                        if(currentMovingState == .Horizontal)
                         {
-//                                self.isBigg = true;
+                            limitedOffset.width = offset.width;
                         }
-                        else
+                        
+                        if(currentMovingState == .Vertical)
                         {
-//                                self.isBigg = false
+                            limitedOffset.height = offset.height
+                        }
+                        
+                        
+                        if (currentMovingState != .None) { return }
+                        
+                        
+                        if (gesture.translation.width >= triggerLimit || gesture.translation.width <= -triggerLimit)
+                        {
+                            currentMovingState = .Horizontal
+                        }
+                        
+                        if (gesture.translation.height >= triggerLimit || gesture.translation.height <= -triggerLimit)
+                        {
+                            currentMovingState = .Vertical
                         }
                     }
                     .onEnded
-                    { value in
+                    {
+                        
+                        
+                        value in
                         withAnimation(.spring())
                         {
-                        offset = .zero
+                            
+                            limitedOffset = CGSize.zero
                         }
+                        offset = .zero
+                        currentMovingState = .None
                     }
             )
     }
@@ -45,6 +71,6 @@ struct MenuButton: View {
 
 struct MenuButton_Previews: PreviewProvider {
     static var previews: some View {
-        MenuButton()
+        MenuButton(currentThumbstickState: .constant(.North))
     }
 }

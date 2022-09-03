@@ -6,3 +6,10 @@ enum Thumbstick
     case South
     case West
 }
+
+enum MovingState
+{
+    case None
+    case Horizontal
+    case Vertical
+}

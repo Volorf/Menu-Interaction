@@ -11,12 +11,13 @@ struct ContentView: View {
     
     @State private var currentThumbstickState = Thumbstick.None
     @State private var counter: Int = 0
+
     
     var body: some View
     {
         ZStack()
         {
-            
+            MenuButton(currentThumbstickState: $currentThumbstickState)
             
             MenuItem(labelName: "Settings", buttonThumbstickState: .West, currentThumbstickState: $currentThumbstickState, counter: $counter)
                 .offset(x: -100, y: 0)
