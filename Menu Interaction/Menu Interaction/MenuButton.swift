@@ -12,10 +12,10 @@ struct MenuButton: View {
     @State private var offset = CGSize.zero
     @Binding var currentThumbstickState: Thumbstick
     let triggerLimit: Double = 10
+    let changeStateTriggerLimit: CGFloat = 50
     @State private var currentMovingState: MovingState = .None
     @State private var limitedOffset = CGSize.zero
     
-    /// <#Description#>
     var body: some View {
         Rectangle()
             .fill(.red)
@@ -30,11 +30,39 @@ struct MenuButton: View {
                         
                         if(currentMovingState == .Horizontal)
                         {
+                            
+                            
+                            if (offset.width >= changeStateTriggerLimit)
+                            {
+                                currentThumbstickState = .East
+                                return
+                            }
+                            
+                            if (offset.width <= -changeStateTriggerLimit)
+                            {
+                                currentThumbstickState = .West
+                                return
+                            }
+                            
                             limitedOffset.width = offset.width;
                         }
                         
                         if(currentMovingState == .Vertical)
                         {
+                            
+                            
+                            if (offset.height >= changeStateTriggerLimit)
+                            {
+                                currentThumbstickState = .South
+                                return
+                            }
+                            
+                            if (offset.height <= -changeStateTriggerLimit)
+                            {
+                                currentThumbstickState = .North
+                                return
+                            }
+                            
                             limitedOffset.height = offset.height
                         }
                         
@@ -64,6 +92,7 @@ struct MenuButton: View {
                         }
                         offset = .zero
                         currentMovingState = .None
+                        currentThumbstickState = .None
                     }
             )
     }
