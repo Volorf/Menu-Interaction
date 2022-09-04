@@ -14,7 +14,8 @@ struct MenuItem: View {
     @Binding var currentThumbstickState: Thumbstick
     @Binding var counter: Int
     
-    private let size: Double = 50
+    private let size: Double = 128
+    private let iconSize: Double = 48
     
     var body: some View {
         ZStack()
@@ -24,7 +25,7 @@ struct MenuItem: View {
                 .scaledToFit()
             Rectangle()
                 .fill(.indigo)
-                .frame(width: 20, height: 20)
+                .frame(width: iconSize, height: iconSize)
             Text(labelName)
                 .font(.system(size: 12))
                 .multilineTextAlignment(.center)

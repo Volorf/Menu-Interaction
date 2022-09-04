@@ -12,14 +12,16 @@ struct MenuButton: View {
     @State private var offset = CGSize.zero
     @Binding var currentThumbstickState: Thumbstick
     let triggerLimit: Double = 10
-    let changeStateTriggerLimit: CGFloat = 50
+    let changeStateTriggerLimit: CGFloat = 64
     @State private var currentMovingState: MovingState = .None
     @State private var limitedOffset = CGSize.zero
+    
+    private let buttonSize: Double = 128
     
     var body: some View {
         Rectangle()
             .fill(.red)
-            .frame(width: 100, height: 100)
+            .frame(width: buttonSize, height: buttonSize)
             .offset(x: limitedOffset.width, y: limitedOffset.height)
             .gesture(
                 DragGesture()
