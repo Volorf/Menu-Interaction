@@ -19,8 +19,8 @@ struct MenuButton: View {
     private let buttonSize: Double = 128
     
     var body: some View {
-        Rectangle()
-            .fill(.red)
+        RoundedRectangle(cornerRadius: 16)
+            .fill(.white)
             .frame(width: buttonSize, height: buttonSize)
             .offset(x: limitedOffset.width, y: limitedOffset.height)
             .gesture(

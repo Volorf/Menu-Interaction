@@ -19,6 +19,8 @@ struct ContentView: View {
     {
         ZStack()
         {
+            Color(red: 0.941, green: 0.941, blue: 0.941)
+            
             MenuButton(currentThumbstickState: $currentThumbstickState)
             
             MenuItem(labelName: "Settings", buttonThumbstickState: .West, currentThumbstickState: $currentThumbstickState, counter: $counter)
@@ -30,6 +32,7 @@ struct ContentView: View {
             MenuItem(labelName: "Save", buttonThumbstickState: .South, currentThumbstickState: $currentThumbstickState, counter: $counter)
                 .offset(x: 0, y: offset)
         }
+        .ignoresSafeArea()
         
         
         

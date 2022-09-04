@@ -20,8 +20,8 @@ struct MenuItem: View {
     var body: some View {
         ZStack()
         {
-            Rectangle()
-                .fill(.red)
+            RoundedRectangle(cornerRadius: 16)
+                .fill(.white)
                 .scaledToFit()
             Rectangle()
                 .fill(.indigo)
@@ -48,6 +48,11 @@ struct MenuItem: View {
 
 struct MenuItem_Previews: PreviewProvider {
     static var previews: some View {
-        MenuItem(labelName: "Test", buttonThumbstickState: .North, currentThumbstickState: .constant(.North), counter: .constant(0))
+        ZStack
+        {
+            Color(.gray)
+            MenuItem(labelName: "Test", buttonThumbstickState: .North, currentThumbstickState: .constant(.North), counter: .constant(0))
+        }
+        
     }
 }
