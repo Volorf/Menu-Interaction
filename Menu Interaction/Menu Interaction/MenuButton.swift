@@ -32,40 +32,42 @@ struct MenuButton: View {
                         
                         if(currentMovingState == .Horizontal)
                         {
-                            
+                            limitedOffset.width = offset.width;
                             
                             if (offset.width >= changeStateTriggerLimit)
                             {
                                 currentThumbstickState = .East
+                                limitedOffset.width = changeStateTriggerLimit
                                 return
                             }
                             
                             if (offset.width <= -changeStateTriggerLimit)
                             {
                                 currentThumbstickState = .West
+                                limitedOffset.width = -changeStateTriggerLimit
                                 return
                             }
                             
-                            limitedOffset.width = offset.width;
+                            
                         }
                         
                         if(currentMovingState == .Vertical)
                         {
-                            
+                            limitedOffset.height = offset.height
                             
                             if (offset.height >= changeStateTriggerLimit)
                             {
                                 currentThumbstickState = .South
+                                limitedOffset.height = changeStateTriggerLimit
                                 return
                             }
                             
                             if (offset.height <= -changeStateTriggerLimit)
                             {
                                 currentThumbstickState = .North
+                                limitedOffset.height = -changeStateTriggerLimit
                                 return
                             }
-                            
-                            limitedOffset.height = offset.height
                         }
                         
                         
