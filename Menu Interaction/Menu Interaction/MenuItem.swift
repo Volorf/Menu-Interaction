@@ -13,13 +13,22 @@ struct MenuItem: View {
     let buttonThumbstickState: Thumbstick
     @Binding var currentThumbstickState: Thumbstick
     @Binding var hasThumbstickBeenReleased: Bool
+    @Binding var showItems: Bool
+    @Binding var hasSomethingBeenChanged: Bool
+    
+    @State private var scaleAnime: Double = 0.5
     
     private let size: Double = 128
     private let iconSize: Double = 48
+    private let animDur = 0.2
     
     var body: some View {
+        
+        
+        
         ZStack()
         {
+            
             
             if(currentThumbstickState == buttonThumbstickState && hasThumbstickBeenReleased)
             {
@@ -36,15 +45,15 @@ struct MenuItem: View {
                     .frame(width: size, height: size)
             }
             
-                
-            
         }
         .frame(width: size, height: size)
+        .scaleEffect(showItems ? 1 : 0.5)
+        .opacity(showItems ? 1 : 0)
         .mask(
             Rectangle()
                 .frame(width: size, height: size)
         )
-        
+        .animation(.easeInOut(duration: currentThumbstickState == buttonThumbstickState && !showItems && hasSomethingBeenChanged ? 0 : animDur), value: showItems ? 1 : 0.5)
         
         
     }
@@ -55,7 +64,7 @@ struct MenuItem_Previews: PreviewProvider {
         ZStack
         {
             Color(.gray)
-            MenuItem(labelName: "Test", buttonThumbstickState: .North, currentThumbstickState: .constant(.North), hasThumbstickBeenReleased: .constant(false))
+            MenuItem(labelName: "Test", buttonThumbstickState: .North, currentThumbstickState: .constant(.North), hasThumbstickBeenReleased: .constant(false), showItems: .constant(true), hasSomethingBeenChanged: .constant(false))
         }
         
     }

@@ -13,6 +13,7 @@ struct MenuButton: View {
     @Binding var currentThumbstickState: Thumbstick
     @Binding var hasThumbstickBeenReleased: Bool
     @Binding var showItems: Bool
+    @Binding var hasSomethingBeenChanged: Bool
     
     let triggerLimit: Double = 10
     let changeStateTriggerLimit: CGFloat = 64 + 128
@@ -24,6 +25,8 @@ struct MenuButton: View {
     
     private let fullSize: Double = 128 + 64
     private let buttonSize: Double = 128
+    
+    @State private var somethingChangedObserver: Bool = false
     
     @State private var labelText: String = "P"
     
@@ -47,10 +50,13 @@ struct MenuButton: View {
                     DragGesture(minimumDistance: 0)
                         .onChanged
                         {
+            
                             gesture in offset = gesture.translation
                             
                             hasThumbstickBeenReleased = false
                             showItems = true
+                            
+                            hasSomethingBeenChanged = somethingChangedObserver
                             
                             if(currentMovingState == .Horizontal)
                             {
@@ -67,6 +73,8 @@ struct MenuButton: View {
                                     
                                     labelText = "D"
                                     
+                                    somethingChangedObserver = true
+                                    
                                     return
                                 }
                                 
@@ -77,6 +85,8 @@ struct MenuButton: View {
                                     sizeWidthKoef = fullSize
                                     
                                     labelText = "N"
+                                    
+                                    somethingChangedObserver = true
                                     return
                                 }
                                 
@@ -97,6 +107,8 @@ struct MenuButton: View {
                                     sizeHeightKoef = fullSize
                                     
                                     labelText = "R"
+                                    
+                                    somethingChangedObserver = true
                                     return
                                 }
                                 
@@ -107,6 +119,8 @@ struct MenuButton: View {
                                     sizeHeightKoef = fullSize
                                     
                                     labelText = "P"
+                                    
+                                    somethingChangedObserver = true
                                     return
                                 }
                             }
@@ -140,6 +154,8 @@ struct MenuButton: View {
 //                            currentThumbstickState = .None
                             hasThumbstickBeenReleased = true
                             showItems = false
+                            somethingChangedObserver = false
+                            print("hasBennSomethignChanged \(hasSomethingBeenChanged)")
                         }
 
                 )
@@ -163,6 +179,6 @@ struct MenuButton: View {
 
 struct MenuButton_Previews: PreviewProvider {
     static var previews: some View {
-        MenuButton(currentThumbstickState: .constant(.North), hasThumbstickBeenReleased: .constant(false), showItems: .constant(true))
+        MenuButton(currentThumbstickState: .constant(.North), hasThumbstickBeenReleased: .constant(false), showItems: .constant(true), hasSomethingBeenChanged: .constant(true))
     }
 }

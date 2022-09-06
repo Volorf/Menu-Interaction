@@ -14,38 +14,29 @@ struct ContentView: View {
     @State private var currentThumbstickState = Thumbstick.North
     @State private var hasThumbstickBeenReleased: Bool = false;
     @State private var showItems: Bool = false
+    @State private var hasSomethingBeenChanged = false
     
     private let offset: Double = 192
 
-    
     var body: some View
     {
         ZStack()
         {
             Color(red: 0.133, green: 0.133, blue: 0.133)
             
-            MenuButton(currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased, showItems: $showItems)
+            MenuButton(currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased, showItems: $showItems, hasSomethingBeenChanged: $hasSomethingBeenChanged)
             
-            if(showItems)
-            {
-                MenuItem(labelName: "N", buttonThumbstickState: .West, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased)
+
+                MenuItem(labelName: "N", buttonThumbstickState: .West, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased, showItems: $showItems, hasSomethingBeenChanged: $hasSomethingBeenChanged)
                     .offset(x: -offset, y: 0)
-                MenuItem(labelName: "P", buttonThumbstickState: .North, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased)
+                MenuItem(labelName: "P", buttonThumbstickState: .North, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased, showItems: $showItems, hasSomethingBeenChanged: $hasSomethingBeenChanged)
                     .offset(x: 0, y: -offset)
-                MenuItem(labelName: "D", buttonThumbstickState: .East, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased)
+                MenuItem(labelName: "D", buttonThumbstickState: .East, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased, showItems: $showItems, hasSomethingBeenChanged: $hasSomethingBeenChanged)
                     .offset(x: offset, y: 0)
-                MenuItem(labelName: "R", buttonThumbstickState: .South, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased)
+                MenuItem(labelName: "R", buttonThumbstickState: .South, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased, showItems: $showItems, hasSomethingBeenChanged: $hasSomethingBeenChanged)
                     .offset(x: 0, y: offset)
-            }
-            
-            
-            
-            
         }
-        .ignoresSafeArea()
-        
-        
-        
+        .ignoresSafeArea()  
     }
 }
 
