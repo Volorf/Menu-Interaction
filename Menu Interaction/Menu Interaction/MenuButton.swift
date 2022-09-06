@@ -25,6 +25,7 @@ struct MenuButton: View {
     
     private let fullSize: Double = 128 + 64
     private let buttonSize: Double = 128
+    private let animDur: Double = 0.3
     
     @State private var somethingChangedObserver: Bool = false
     
@@ -155,22 +156,17 @@ struct MenuButton: View {
                             hasThumbstickBeenReleased = true
                             showItems = false
                             somethingChangedObserver = false
-                            print("hasBennSomethignChanged \(hasSomethingBeenChanged)")
                         }
 
                 )
-                .onTapGesture
-                {
-                    
-//                    currentThumbstickState = .None
-//                    showItems = true
-                }
                 
                 Text(labelText)
-                .foregroundColor(!showItems ? .white : Color(red: 0.2, green: 0.2, blue: 0.2))
+                .foregroundColor(.white)
                     .font(.custom("Helvetica", size: 40))
                     .frame(width: buttonSize, height: buttonSize)
                     .offset(x: limitedOffset.width, y: limitedOffset.height)
+                    .opacity(showItems ? 0 : 1)
+                    .animation(.easeInOut(duration: hasSomethingBeenChanged ? 0 : animDur), value: showItems ? 0 : 1)
             
         }
         
