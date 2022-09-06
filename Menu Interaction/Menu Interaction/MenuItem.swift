@@ -21,15 +21,12 @@ struct MenuItem: View {
         ZStack()
         {
             RoundedRectangle(cornerRadius: 16)
-                .fill(.white)
+                .fill(Color(red: 0.2, green: 0.2, blue: 0.2, opacity: 0.5))
                 .scaledToFit()
-            Rectangle()
-                .fill(.indigo)
-                .frame(width: iconSize, height: iconSize)
             Text(labelName)
-                .font(.system(size: 12))
-                .multilineTextAlignment(.center)
-                .offset(x: 0, y: currentThumbstickState == buttonThumbstickState ? 10 : size - 30)
+            .foregroundColor(.white)
+                .font(.custom("Helvetica", size: 40))
+                .frame(width: size, height: size)
         }
         .frame(width: size, height: size)
         .mask(

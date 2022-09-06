@@ -12,93 +12,139 @@ struct MenuButton: View {
     @State private var offset = CGSize.zero
     @Binding var currentThumbstickState: Thumbstick
     let triggerLimit: Double = 10
-    let changeStateTriggerLimit: CGFloat = 64
+    let changeStateTriggerLimit: CGFloat = 64 + 128
     @State private var currentMovingState: MovingState = .None
     @State private var limitedOffset = CGSize.zero
     
+    @State private var sizeWidthKoef: Double = 0.0
+    @State private var sizeHeightKoef: Double = 0.0
+    
+    private let fullSize: Double = 128 + 64
     private let buttonSize: Double = 128
     
-    var body: some View {
-        RoundedRectangle(cornerRadius: 16)
-            .fill(.white)
-            .frame(width: buttonSize, height: buttonSize)
-            .offset(x: limitedOffset.width, y: limitedOffset.height)
-            .gesture(
-                DragGesture()
-                    .onChanged
-                    {
-                        gesture in offset = gesture.translation
-                        print("offset:  \(offset)")
-                        
-                        if(currentMovingState == .Horizontal)
+    @State private var labelText: String = "D"
+    @State private var showLabel: Bool = true;
+    
+    var body: some View
+    {
+        ZStack()
+        {
+            
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(red: 0.2, green: 0.2, blue: 0.2))
+                .frame(width: buttonSize + sizeWidthKoef, height: buttonSize + sizeHeightKoef)
+                .offset(x: limitedOffset.width / 2, y: limitedOffset.height / 2)
+            
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(red: 0.2, green: 0.2, blue: 0.2))
+                .frame(width: buttonSize, height: buttonSize)
+                .offset(x: limitedOffset.width, y: limitedOffset.height)
+                .gesture(
+                    DragGesture()
+                        .onChanged
                         {
-                            limitedOffset.width = offset.width;
+                            gesture in offset = gesture.translation
                             
-                            if (offset.width >= changeStateTriggerLimit)
+                            showLabel = false
+                            
+                            if(currentMovingState == .Horizontal)
                             {
-                                currentThumbstickState = .East
-                                limitedOffset.width = changeStateTriggerLimit
-                                return
+                                limitedOffset.width = offset.width
+                                
+                                sizeWidthKoef = abs(limitedOffset.width)
+                                sizeHeightKoef = 0
+                                
+                                if (offset.width >= changeStateTriggerLimit)
+                                {
+                                    currentThumbstickState = .East
+                                    limitedOffset.width = changeStateTriggerLimit
+                                    sizeWidthKoef = fullSize
+                                    
+                                    labelText = "D"
+                                    
+                                    return
+                                }
+                                
+                                if (offset.width <= -changeStateTriggerLimit)
+                                {
+                                    currentThumbstickState = .West
+                                    limitedOffset.width = -changeStateTriggerLimit
+                                    sizeWidthKoef = fullSize
+                                    
+                                    labelText = "N"
+                                    return
+                                }
+                                
+                                
                             }
                             
-                            if (offset.width <= -changeStateTriggerLimit)
+                            if(currentMovingState == .Vertical)
                             {
-                                currentThumbstickState = .West
-                                limitedOffset.width = -changeStateTriggerLimit
-                                return
+                                limitedOffset.height = offset.height
+                                
+                                sizeHeightKoef = abs(limitedOffset.height)
+                                sizeWidthKoef = 0
+                                
+                                if (offset.height >= changeStateTriggerLimit)
+                                {
+                                    currentThumbstickState = .South
+                                    limitedOffset.height = changeStateTriggerLimit
+                                    sizeHeightKoef = fullSize
+                                    
+                                    labelText = "R"
+                                    return
+                                }
+                                
+                                if (offset.height <= -changeStateTriggerLimit)
+                                {
+                                    currentThumbstickState = .North
+                                    limitedOffset.height = -changeStateTriggerLimit
+                                    sizeHeightKoef = fullSize
+                                    
+                                    labelText = "P"
+                                    return
+                                }
                             }
                             
                             
-                        }
-                        
-                        if(currentMovingState == .Vertical)
-                        {
-                            limitedOffset.height = offset.height
+                            if (currentMovingState != .None) { return }
                             
-                            if (offset.height >= changeStateTriggerLimit)
+                            
+                            if (gesture.translation.width >= triggerLimit || gesture.translation.width <= -triggerLimit)
                             {
-                                currentThumbstickState = .South
-                                limitedOffset.height = changeStateTriggerLimit
-                                return
+                                currentMovingState = .Horizontal
                             }
                             
-                            if (offset.height <= -changeStateTriggerLimit)
+                            if (gesture.translation.height >= triggerLimit || gesture.translation.height <= -triggerLimit)
                             {
-                                currentThumbstickState = .North
-                                limitedOffset.height = -changeStateTriggerLimit
-                                return
+                                currentMovingState = .Vertical
                             }
                         }
-                        
-                        
-                        if (currentMovingState != .None) { return }
-                        
-                        
-                        if (gesture.translation.width >= triggerLimit || gesture.translation.width <= -triggerLimit)
+                        .onEnded
                         {
-                            currentMovingState = .Horizontal
+                            value in
+                            withAnimation(.spring())
+                            {
+                                
+                                limitedOffset = CGSize.zero
+                                sizeWidthKoef = 0
+                                sizeHeightKoef = 0
+                            }
+                            offset = .zero
+                            currentMovingState = .None
+                            currentThumbstickState = .None
+                            showLabel = true
                         }
-                        
-                        if (gesture.translation.height >= triggerLimit || gesture.translation.height <= -triggerLimit)
-                        {
-                            currentMovingState = .Vertical
-                        }
-                    }
-                    .onEnded
-                    {
-                        
-                        
-                        value in
-                        withAnimation(.spring())
-                        {
-                            
-                            limitedOffset = CGSize.zero
-                        }
-                        offset = .zero
-                        currentMovingState = .None
-                        currentThumbstickState = .None
-                    }
-            )
+                )
+                
+                Text(labelText)
+                .foregroundColor(showLabel ? .white : Color(red: 0.2, green: 0.2, blue: 0.2))
+                    .font(.custom("Helvetica", size: 40))
+                    .frame(width: buttonSize, height: buttonSize)
+                    .offset(x: limitedOffset.width, y: limitedOffset.height)
+            
+        }
+        
     }
 }
 

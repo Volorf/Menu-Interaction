@@ -19,18 +19,20 @@ struct ContentView: View {
     {
         ZStack()
         {
-            Color(red: 0.941, green: 0.941, blue: 0.941)
+            Color(red: 0.133, green: 0.133, blue: 0.133)
             
             MenuButton(currentThumbstickState: $currentThumbstickState)
             
-            MenuItem(labelName: "Settings", buttonThumbstickState: .West, currentThumbstickState: $currentThumbstickState, counter: $counter)
+            MenuItem(labelName: "N", buttonThumbstickState: .West, currentThumbstickState: $currentThumbstickState, counter: $counter)
                 .offset(x: -offset, y: 0)
-            MenuItem(labelName: "Create", buttonThumbstickState: .North, currentThumbstickState: $currentThumbstickState, counter: $counter)
+            MenuItem(labelName: "P", buttonThumbstickState: .North, currentThumbstickState: $currentThumbstickState, counter: $counter)
                 .offset(x: 0, y: -offset)
-            MenuItem(labelName: "Library", buttonThumbstickState: .East, currentThumbstickState: $currentThumbstickState, counter: $counter)
+            MenuItem(labelName: "D", buttonThumbstickState: .East, currentThumbstickState: $currentThumbstickState, counter: $counter)
                 .offset(x: offset, y: 0)
-            MenuItem(labelName: "Save", buttonThumbstickState: .South, currentThumbstickState: $currentThumbstickState, counter: $counter)
+            MenuItem(labelName: "R", buttonThumbstickState: .South, currentThumbstickState: $currentThumbstickState, counter: $counter)
                 .offset(x: 0, y: offset)
+            
+            
         }
         .ignoresSafeArea()
         
