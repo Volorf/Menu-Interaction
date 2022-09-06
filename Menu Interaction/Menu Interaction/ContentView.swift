@@ -9,8 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     
+    
+    // TODO: Make a custom data structure to hold all the stuff
     @State private var currentThumbstickState = Thumbstick.None
-    @State private var counter: Int = 0
+    @State private var hasThumbstickBeenReleased: Bool = false;
+    @State private var showItems: Bool = false
     
     private let offset: Double = 192
 
@@ -21,16 +24,21 @@ struct ContentView: View {
         {
             Color(red: 0.133, green: 0.133, blue: 0.133)
             
-            MenuButton(currentThumbstickState: $currentThumbstickState)
+            MenuButton(currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased, showItems: $showItems)
             
-            MenuItem(labelName: "N", buttonThumbstickState: .West, currentThumbstickState: $currentThumbstickState, counter: $counter)
-                .offset(x: -offset, y: 0)
-            MenuItem(labelName: "P", buttonThumbstickState: .North, currentThumbstickState: $currentThumbstickState, counter: $counter)
-                .offset(x: 0, y: -offset)
-            MenuItem(labelName: "D", buttonThumbstickState: .East, currentThumbstickState: $currentThumbstickState, counter: $counter)
-                .offset(x: offset, y: 0)
-            MenuItem(labelName: "R", buttonThumbstickState: .South, currentThumbstickState: $currentThumbstickState, counter: $counter)
-                .offset(x: 0, y: offset)
+            if(showItems)
+            {
+                MenuItem(labelName: "N", buttonThumbstickState: .West, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased)
+                    .offset(x: -offset, y: 0)
+                MenuItem(labelName: "P", buttonThumbstickState: .North, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased)
+                    .offset(x: 0, y: -offset)
+                MenuItem(labelName: "D", buttonThumbstickState: .East, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased)
+                    .offset(x: offset, y: 0)
+                MenuItem(labelName: "R", buttonThumbstickState: .South, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased)
+                    .offset(x: 0, y: offset)
+            }
+            
+            
             
             
         }

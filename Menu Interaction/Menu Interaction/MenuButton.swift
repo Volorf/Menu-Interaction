@@ -11,6 +11,9 @@ struct MenuButton: View {
     
     @State private var offset = CGSize.zero
     @Binding var currentThumbstickState: Thumbstick
+    @Binding var hasThumbstickBeenReleased: Bool
+    @Binding var showItems: Bool
+    
     let triggerLimit: Double = 10
     let changeStateTriggerLimit: CGFloat = 64 + 128
     @State private var currentMovingState: MovingState = .None
@@ -27,9 +30,11 @@ struct MenuButton: View {
     
     var body: some View
     {
+
+        
         ZStack()
         {
-            
+
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color(red: 0.2, green: 0.2, blue: 0.2))
                 .frame(width: buttonSize + sizeWidthKoef, height: buttonSize + sizeHeightKoef)
@@ -40,10 +45,13 @@ struct MenuButton: View {
                 .frame(width: buttonSize, height: buttonSize)
                 .offset(x: limitedOffset.width, y: limitedOffset.height)
                 .gesture(
-                    DragGesture()
+                    DragGesture(minimumDistance: 0)
                         .onChanged
                         {
                             gesture in offset = gesture.translation
+                            
+                            hasThumbstickBeenReleased = false
+                            showItems = true
                             
                             showLabel = false
                             
@@ -132,10 +140,19 @@ struct MenuButton: View {
                             }
                             offset = .zero
                             currentMovingState = .None
-                            currentThumbstickState = .None
+//                            currentThumbstickState = .None
                             showLabel = true
+                            hasThumbstickBeenReleased = true
+                            showItems = false
                         }
+
                 )
+                .onTapGesture
+                {
+                    
+//                    currentThumbstickState = .None
+//                    showItems = true
+                }
                 
                 Text(labelText)
                 .foregroundColor(showLabel ? .white : Color(red: 0.2, green: 0.2, blue: 0.2))
@@ -150,6 +167,6 @@ struct MenuButton: View {
 
 struct MenuButton_Previews: PreviewProvider {
     static var previews: some View {
-        MenuButton(currentThumbstickState: .constant(.North))
+        MenuButton(currentThumbstickState: .constant(.North), hasThumbstickBeenReleased: .constant(false), showItems: .constant(true))
     }
 }
