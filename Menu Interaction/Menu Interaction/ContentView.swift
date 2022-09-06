@@ -11,7 +11,7 @@ struct ContentView: View {
     
     
     // TODO: Make a custom data structure to hold all the stuff
-    @State private var currentThumbstickState = Thumbstick.None
+    @State private var currentThumbstickState = Thumbstick.North
     @State private var hasThumbstickBeenReleased: Bool = false;
     @State private var showItems: Bool = false
     

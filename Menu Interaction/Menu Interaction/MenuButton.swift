@@ -25,8 +25,7 @@ struct MenuButton: View {
     private let fullSize: Double = 128 + 64
     private let buttonSize: Double = 128
     
-    @State private var labelText: String = "D"
-    @State private var showLabel: Bool = true;
+    @State private var labelText: String = "P"
     
     var body: some View
     {
@@ -52,8 +51,6 @@ struct MenuButton: View {
                             
                             hasThumbstickBeenReleased = false
                             showItems = true
-                            
-                            showLabel = false
                             
                             if(currentMovingState == .Horizontal)
                             {
@@ -141,7 +138,6 @@ struct MenuButton: View {
                             offset = .zero
                             currentMovingState = .None
 //                            currentThumbstickState = .None
-                            showLabel = true
                             hasThumbstickBeenReleased = true
                             showItems = false
                         }
@@ -155,7 +151,7 @@ struct MenuButton: View {
                 }
                 
                 Text(labelText)
-                .foregroundColor(showLabel ? .white : Color(red: 0.2, green: 0.2, blue: 0.2))
+                .foregroundColor(!showItems ? .white : Color(red: 0.2, green: 0.2, blue: 0.2))
                     .font(.custom("Helvetica", size: 40))
                     .frame(width: buttonSize, height: buttonSize)
                     .offset(x: limitedOffset.width, y: limitedOffset.height)

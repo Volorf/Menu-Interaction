@@ -28,10 +28,10 @@ struct MenuItem: View {
             else
             {
                 RoundedRectangle(cornerRadius: 16)
-                    .fill(Color(red: 0.2, green: 0.2, blue: 0.2, opacity: 0.5))
+                    .fill(Color(red: 0.2, green: 0.2, blue: 0.2, opacity: 1))
                     .scaledToFit()
                 Text(labelName)
-                .foregroundColor(.white)
+                    .foregroundColor(currentThumbstickState != buttonThumbstickState ? .gray : .white)
                     .font(.custom("Helvetica", size: 40))
                     .frame(width: size, height: size)
             }
