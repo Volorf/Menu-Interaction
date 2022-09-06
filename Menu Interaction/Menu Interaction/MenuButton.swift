@@ -9,35 +9,30 @@ import SwiftUI
 
 struct MenuButton: View {
     
-    @State private var offset = CGSize.zero
+    
     @Binding var currentThumbstickState: Thumbstick
     @Binding var hasThumbstickBeenReleased: Bool
     @Binding var showItems: Bool
     @Binding var hasSomethingBeenChanged: Bool
     
-    let triggerLimit: Double = 10
-    let changeStateTriggerLimit: CGFloat = 64 + 128
+    @State private var offset = CGSize.zero
     @State private var currentMovingState: MovingState = .None
     @State private var limitedOffset = CGSize.zero
-    
     @State private var sizeWidthKoef: Double = 0.0
     @State private var sizeHeightKoef: Double = 0.0
+    @State private var somethingChangedObserver: Bool = false
+    @State private var labelText: String = "P"
     
+    private let triggerLimit: Double = 10
+    private let changeStateTriggerLimit: CGFloat = 64 + 128
     private let fullSize: Double = 128 + 64
     private let buttonSize: Double = 128
     private let animDur: Double = 0.3
     
-    @State private var somethingChangedObserver: Bool = false
-    
-    @State private var labelText: String = "P"
-    
     var body: some View
     {
-
-        
         ZStack()
         {
-
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color(red: 0.2, green: 0.2, blue: 0.2))
                 .frame(width: buttonSize + sizeWidthKoef, height: buttonSize + sizeHeightKoef)
@@ -166,7 +161,8 @@ struct MenuButton: View {
                     .frame(width: buttonSize, height: buttonSize)
                     .offset(x: limitedOffset.width, y: limitedOffset.height)
                     .opacity(showItems ? 0 : 1)
-                    .animation(.easeInOut(duration: hasSomethingBeenChanged ? 0 : animDur), value: showItems ? 0 : 1)
+                    .animation(.easeOut(duration: hasSomethingBeenChanged ? 0 : animDur), value: showItems ? 0 : 1)
+                    .allowsHitTesting(false)
             
         }
         

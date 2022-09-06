@@ -11,6 +11,7 @@ struct MenuItem: View {
     
     let labelName: String
     let buttonThumbstickState: Thumbstick
+    
     @Binding var currentThumbstickState: Thumbstick
     @Binding var hasThumbstickBeenReleased: Bool
     @Binding var showItems: Bool
@@ -22,14 +23,11 @@ struct MenuItem: View {
     private let iconSize: Double = 48
     private let animDur: Double = 0.3
     
-    var body: some View {
-        
-        
-        
+    var body: some View
+    {
         ZStack()
         {
-            
-            
+            // TODO: Invert the statement
             if(currentThumbstickState == buttonThumbstickState && hasThumbstickBeenReleased && hasSomethingBeenChanged)
             {
                 
@@ -45,7 +43,7 @@ struct MenuItem: View {
                     .opacity(currentThumbstickState != buttonThumbstickState ? 0.3 : 1)
                 
                     .frame(width: size, height: size)
-                    .animation(.easeInOut(duration: animDur), value: currentThumbstickState != buttonThumbstickState ? 0.3 : 1)
+                    .animation(.easeOut(duration: animDur), value: currentThumbstickState != buttonThumbstickState ? 0.3 : 1)
             }
             
         }
@@ -56,9 +54,7 @@ struct MenuItem: View {
             Rectangle()
                 .frame(width: size, height: size)
         )
-        .animation(.easeInOut(duration: currentThumbstickState == buttonThumbstickState && !showItems && hasSomethingBeenChanged ? 0 : animDur), value: showItems ? 1 : 0.5)
-        
-        
+        .animation(.easeOut(duration: currentThumbstickState == buttonThumbstickState && !showItems && hasSomethingBeenChanged ? 0 : animDur), value: showItems ? 1 : 0.5)
     }
 }
 
@@ -67,7 +63,7 @@ struct MenuItem_Previews: PreviewProvider {
         ZStack
         {
             Color(.gray)
-            MenuItem(labelName: "Test", buttonThumbstickState: .North, currentThumbstickState: .constant(.North), hasThumbstickBeenReleased: .constant(false), showItems: .constant(true), hasSomethingBeenChanged: .constant(false))
+            MenuItem(labelName: "", buttonThumbstickState: .North, currentThumbstickState: .constant(.North), hasThumbstickBeenReleased: .constant(false), showItems: .constant(true), hasSomethingBeenChanged: .constant(false))
         }
         
     }

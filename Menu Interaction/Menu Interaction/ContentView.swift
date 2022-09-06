@@ -26,13 +26,15 @@ struct ContentView: View {
             
             MenuButton(currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased, showItems: $showItems, hasSomethingBeenChanged: $hasSomethingBeenChanged)
             
-
                 MenuItem(labelName: "N", buttonThumbstickState: .West, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased, showItems: $showItems, hasSomethingBeenChanged: $hasSomethingBeenChanged)
                     .offset(x: -offset, y: 0)
+            
                 MenuItem(labelName: "P", buttonThumbstickState: .North, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased, showItems: $showItems, hasSomethingBeenChanged: $hasSomethingBeenChanged)
                     .offset(x: 0, y: -offset)
+            
                 MenuItem(labelName: "D", buttonThumbstickState: .East, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased, showItems: $showItems, hasSomethingBeenChanged: $hasSomethingBeenChanged)
                     .offset(x: offset, y: 0)
+            
                 MenuItem(labelName: "R", buttonThumbstickState: .South, currentThumbstickState: $currentThumbstickState, hasThumbstickBeenReleased: $hasThumbstickBeenReleased, showItems: $showItems, hasSomethingBeenChanged: $hasSomethingBeenChanged)
                     .offset(x: 0, y: offset)
         }
