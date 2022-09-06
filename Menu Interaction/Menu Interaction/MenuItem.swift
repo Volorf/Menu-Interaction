@@ -20,7 +20,7 @@ struct MenuItem: View {
     
     private let size: Double = 128
     private let iconSize: Double = 48
-    private let animDur = 0.2
+    private let animDur: Double = 1
     
     var body: some View {
         
@@ -30,7 +30,7 @@ struct MenuItem: View {
         {
             
             
-            if(currentThumbstickState == buttonThumbstickState && hasThumbstickBeenReleased)
+            if(currentThumbstickState == buttonThumbstickState && hasThumbstickBeenReleased && hasSomethingBeenChanged)
             {
                 
             }
@@ -40,9 +40,12 @@ struct MenuItem: View {
                     .fill(Color(red: 0.2, green: 0.2, blue: 0.2, opacity: 1))
                     .scaledToFit()
                 Text(labelName)
-                    .foregroundColor(currentThumbstickState != buttonThumbstickState ? .gray : .white)
+                    .foregroundColor(.white)
                     .font(.custom("Helvetica", size: 40))
+//                    .opacity(currentThumbstickState != buttonThumbstickState ? 0.3 : 1)
+                
                     .frame(width: size, height: size)
+//                    .animation(.easeInOut(duration: animDur), value: currentThumbstickState != buttonThumbstickState ? 0.3 : 1)
             }
             
         }
