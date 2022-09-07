@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E49E2ACF28C87EA600D40D34 /* AeonikMonoTRIAL-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E49E2ACE28C87EA600D40D34 /* AeonikMonoTRIAL-Bold.otf */; };
 		E4A3CA7E28C263C400DA7E28 /* MenuInteractionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A3CA7D28C263C400DA7E28 /* MenuInteractionApp.swift */; };
 		E4A3CA8028C263C400DA7E28 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A3CA7F28C263C400DA7E28 /* ContentView.swift */; };
 		E4A3CA8228C263C700DA7E28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4A3CA8128C263C700DA7E28 /* Assets.xcassets */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E49E2ACE28C87EA600D40D34 /* AeonikMonoTRIAL-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AeonikMonoTRIAL-Bold.otf"; sourceTree = "<group>"; };
+		E49E2AD028C87F6200D40D34 /* Menu-Interaction-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Menu-Interaction-Info.plist"; sourceTree = SOURCE_ROOT; };
 		E4A3CA7A28C263C400DA7E28 /* Menu Interaction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Menu Interaction.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4A3CA7D28C263C400DA7E28 /* MenuInteractionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInteractionApp.swift; sourceTree = "<group>"; };
 		E4A3CA7F28C263C400DA7E28 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -57,6 +60,8 @@
 		E4A3CA7C28C263C400DA7E28 /* Menu Interaction */ = {
 			isa = PBXGroup;
 			children = (
+				E49E2AD028C87F6200D40D34 /* Menu-Interaction-Info.plist */,
+				E49E2ACE28C87EA600D40D34 /* AeonikMonoTRIAL-Bold.otf */,
 				E4A3CA8F28C35A6C00DA7E28 /* MenuButton.swift */,
 				E4A3CA8D28C288E500DA7E28 /* Enums.swift */,
 				E4A3CA7D28C263C400DA7E28 /* MenuInteractionApp.swift */,
@@ -135,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4A3CA8528C263C700DA7E28 /* Preview Assets.xcassets in Resources */,
+				E49E2ACF28C87EA600D40D34 /* AeonikMonoTRIAL-Bold.otf in Resources */,
 				E4A3CA8228C263C700DA7E28 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +288,7 @@
 				DEVELOPMENT_TEAM = BW62R7MWZ5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Menu-Interaction-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -311,6 +318,7 @@
 				DEVELOPMENT_TEAM = BW62R7MWZ5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Menu-Interaction-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

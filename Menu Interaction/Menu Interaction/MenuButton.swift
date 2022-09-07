@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MenuButton: View {
     
-    
     @Binding var currentThumbstickState: Thumbstick
     @Binding var hasThumbstickBeenReleased: Bool
     @Binding var showItems: Bool
@@ -37,7 +36,7 @@ struct MenuButton: View {
                 .fill(Color(red: 0.2, green: 0.2, blue: 0.2))
                 .frame(width: buttonSize + sizeWidthKoef, height: buttonSize + sizeHeightKoef)
                 .offset(x: limitedOffset.width / 2, y: limitedOffset.height / 2)
-            
+        
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color(red: 0.2, green: 0.2, blue: 0.2))
                 .frame(width: buttonSize, height: buttonSize)
@@ -138,7 +137,9 @@ struct MenuButton: View {
                         .onEnded
                         {
                             value in
-                            withAnimation(.spring())
+                            withAnimation(.spring(response: 0.7,
+                                                  dampingFraction: 0.9,
+                                                  blendDuration: 0.0))
                             {
                                 
                                 limitedOffset = CGSize.zero
@@ -157,20 +158,23 @@ struct MenuButton: View {
                 
                 Text(labelText)
                 .foregroundColor(.white)
-                    .font(.custom("Helvetica", size: 40))
+
+                    .font(.custom("AeonikMonoTRIAL-Bold", size: 40))
                     .frame(width: buttonSize, height: buttonSize)
                     .offset(x: limitedOffset.width, y: limitedOffset.height)
                     .opacity(showItems ? 0 : 1)
                     .animation(.easeOut(duration: hasSomethingBeenChanged ? 0 : animDur), value: showItems ? 0 : 1)
                     .allowsHitTesting(false)
+                    
             
         }
+        .statusBar(hidden: true)
         
     }
 }
 
 struct MenuButton_Previews: PreviewProvider {
     static var previews: some View {
-        MenuButton(currentThumbstickState: .constant(.North), hasThumbstickBeenReleased: .constant(false), showItems: .constant(true), hasSomethingBeenChanged: .constant(true))
+        MenuButton(currentThumbstickState: .constant(.North), hasThumbstickBeenReleased: .constant(false), showItems: .constant(false), hasSomethingBeenChanged: .constant(true))
     }
 }

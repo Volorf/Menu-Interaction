@@ -28,7 +28,8 @@ struct MenuItem: View {
         ZStack()
         {
             // TODO: Invert the statement
-            if(currentThumbstickState == buttonThumbstickState && hasThumbstickBeenReleased && hasSomethingBeenChanged)
+            if(currentThumbstickState == buttonThumbstickState
+               && hasThumbstickBeenReleased && hasSomethingBeenChanged)
             {
                 
             }
@@ -39,7 +40,7 @@ struct MenuItem: View {
                     .scaledToFit()
                 Text(labelName)
                     .foregroundColor(.white)
-                    .font(.custom("Helvetica", size: 40))
+                    .font(.custom("AeonikMonoTRIAL-Bold", size: 40))
                     .opacity(currentThumbstickState != buttonThumbstickState ? 0.3 : 1)
                 
                     .frame(width: size, height: size)
